@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import { Switch } from "react-router-dom";
-
 import store from "./redux/store";
 import setAuthToken from "./redux/auth/auth.utils";
 import { loadUser } from "./redux/auth/auth.actions";
-
 import Header from "./components/organisms/Header/Header.component";
 import Alert from "./components/Alert/Alert.component";
 import HomePage from "./modules/HomePage/HomePage.component";
@@ -21,10 +19,12 @@ import ProfilePage from "./modules/ProfilePage/ProfilePage.component";
 import NotFound from "./modules/NotFound/NotFound.component";
 import Tags from "./components/Tags";
 import Profil from "./modules/AllUsersPage/Profil";
+import MobileSide from "./components/organisms/MobileSideBar";
 
 import { BaseRoute, LayoutRoute } from "./Router";
 
 import "./App.css";
+import { Box } from "@mui/material";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -37,9 +37,14 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <div className="App">
-        <Header />
-        {/* <Alert /> */}
+      <Box className="App">
+        <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          <Header />
+        </Box>
+        <Box sx={{ display: { xs: "block", sm: "none" } }}>
+          <MobileSide />
+        </Box>
+        {/* <Alert /><Header /> */}
         <Switch>
           <LayoutRoute exact path="/" title="CLONE Stack Overflow - Where Developers Learn, Share, & Build Careers">
             <HomePage />
@@ -90,7 +95,7 @@ const App = () => {
             <NotFound />
           </BaseRoute>
         </Switch>
-      </div>
+      </Box>
     </Provider>
   );
 };
