@@ -27,12 +27,7 @@ const Header = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           <img alt="user-logo" className="logo" src={user.gravatar} />
         </Link>
       )}
-      <LinkButton
-        text={"Log out"}
-        link={"/login"}
-        type={"s-btn__filled"}
-        handleClick={logout}
-      />
+      <LinkButton text={"Log out"} link={"/login"} type={"s-btn__filled"} handleClick={logout} />
     </div>
   );
 
@@ -49,7 +44,7 @@ const Header = ({ auth: { isAuthenticated, loading, user }, logout }) => {
       <Link to="/" className="s-navigation--item">
         Home
       </Link>
-      <Link to="/" className="s-navigation--item not-selected">
+      <Link to="/Profil" className="s-navigation--item not-selected">
         Profile
       </Link>
       <Link to="/" className="s-navigation--item not-selected">
@@ -67,11 +62,7 @@ const Header = ({ auth: { isAuthenticated, loading, user }, logout }) => {
 
   const SearchBar = () => {
     return (
-      <form
-        onSubmit={() => history.push("/questions")}
-        className="small-search-form"
-        autoComplete="off"
-      >
+      <form onSubmit={() => history.push("/questions")} className="small-search-form" autoComplete="off">
         <input
           className="small-search"
           autoComplete="off"
@@ -119,13 +110,8 @@ const Header = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           </div>
         </form>
         <div className="header-search-div">
-          <Search
-            className="search-icon"
-            onClick={() => setSearchState(!searchState)}
-          />
-          {!loading && (
-            <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
-          )}
+          <Search className="search-icon" onClick={() => setSearchState(!searchState)} />
+          {!loading && <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>}
         </div>
       </nav>
       {searchState && <SearchBar />}

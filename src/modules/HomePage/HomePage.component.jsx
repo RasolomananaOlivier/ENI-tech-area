@@ -19,11 +19,7 @@ import { Box } from "@mui/material";
 
 const itemsPerPage = 10;
 
-const HomePage = ({
-  getPosts,
-  getPostsByUserTags,
-  post: { posts, loading },
-}) => {
+const HomePage = ({ getPosts, getPostsByUserTags, post: { posts, loading } }) => {
   const URL = useLocation();
   const [open, setOpen] = React.useState(false);
   const [TagsOpen, setTagsOpen] = React.useState(false);
@@ -48,36 +44,17 @@ const HomePage = ({
     <Spinner type="page" width="75px" height="200px" />
   ) : (
     <Fragment>
-      <Box
-        id="mainbar"
-        className="homepage fc-black-800"
-        sx={{ bgcolor: "#323741", pr: 2 }}
-      >
+      <Box id="mainbar" className="homepage fc-black-800" sx={{ bgcolor: "#323741", pr: 2 }}>
         <Box className="questions-grid" sx={{ pr: 3 }}>
           <h3 className="questions-headline">Top Questions</h3>
           <div className="questions-btn">
-            <LinkButton
-              text={"Ask Question"}
-              link={"/add/question"}
-              type={"s-btn__primary"}
-            />
+            <LinkButton text={"Ask Question"} link={"/add/question"} type={"s-btn__primary"} />
           </div>
         </Box>
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          sx={{ px: 3, pr: 4.5 }}
-        >
-          <span>
-            {new Intl.NumberFormat("en-IN").format(posts.length)} questions
-          </span>
+        <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ px: 3, pr: 4.5 }}>
+          <span>{new Intl.NumberFormat("en-IN").format(posts.length)} questions</span>
           <div className="btns-filter">
-            <ButtonGroup
-              buttons={["Today", "Week", "Month", "Year"]}
-              selected={sortType}
-              setSelected={setSortType}
-            />
+            <ButtonGroup buttons={["Today", "Week", "Month", "Year"]} selected={sortType} setSelected={setSortType} />
           </div>
         </Box>
         <Box className="questions" sx={{ pr: 3 }}>
@@ -99,9 +76,7 @@ const HomePage = ({
         </Box>
         <Pagination
           page={page}
-          itemList={posts
-            .sort(handleSorting(sortType))
-            .filter(handleFilter(sortType))}
+          itemList={posts.sort(handleSorting(sortType)).filter(handleFilter(sortType))}
           itemsPerPage={itemsPerPage}
           handlePaginationChange={handlePaginationChange}
         />
@@ -122,6 +97,4 @@ const mapStateToProps = (state) => ({
   post: state.post,
 });
 
-export default connect(mapStateToProps, { getPosts, getPostsByUserTags })(
-  HomePage
-);
+export default connect(mapStateToProps, { getPosts, getPostsByUserTags })(HomePage);
